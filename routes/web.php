@@ -16,6 +16,9 @@ $router->get('/', function () use ($router) {
 });
 $router->get('/wechat', 'Wechat\WechatController@serve');
 
+
+$router->get('/oauth', 'Wechat\AuthController@oauth');
+
 $router->post('/editor', function () use ($router) {
     header("Access-Control-Allow-Origin: *");
     return json_encode(['data'=>['url'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
