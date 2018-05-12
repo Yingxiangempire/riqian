@@ -14,7 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/wechat', 'Wechat\WeChatController@serve');
+$router->get('/wechat', 'Wechat\WechatController@serve');
 
 $router->post('/editor', function () use ($router) {
     header("Access-Control-Allow-Origin: *");
