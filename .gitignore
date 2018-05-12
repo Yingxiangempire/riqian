@@ -13,3 +13,13 @@ vendor/
 *.ntvs*
 *.njsproj
 *.sln
+_ide_helper.php
+.babelrc
+.editorconfig
+package-lock.json
+composer.lock
+package.json
+phpunit.xml
+.postcssrc.js
+
+
