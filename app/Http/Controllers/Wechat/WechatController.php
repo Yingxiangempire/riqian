@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\wechat;
+namespace App\Http\Controllers\Wechat;
 
 
 use Log;
@@ -25,7 +25,7 @@ class WechatController extends Controller
      */
     public function serve()
     {
-     
+
 
         $app = app('wechat.official_account');
         $app->server->push(function($message){
