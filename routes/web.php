@@ -18,6 +18,7 @@ $router->get('/wechat', 'Wechat\WechatController@serve');
 
 
 $router->get('/oauth', 'Wechat\AuthController@oauth');
+$router->get('/auth/callback', 'Wechat\AuthController@callback');
 
 $router->post('/editor', function () use ($router) {
     header("Access-Control-Allow-Origin: *");

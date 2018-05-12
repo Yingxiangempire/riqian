@@ -20,4 +20,12 @@ class AuthController extends Controller
         return $app->oauth->scopes(['snsapi_userinfo'])
             ->redirect();
     }
+
+    public function callback()
+    {
+        $app = app('wechat.official_account');
+        $user = $app->oauth->user();
+        var_dump($user);die;
+    }
+
 }
