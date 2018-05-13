@@ -9,11 +9,19 @@
 namespace App\Http\Controllers\Wechat;
 
 
+use App\Action\User;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
 
+    /**
+     * 微信授权请求地址
+     *
+     * @return mixed
+     * @create_at 18/5/13 下午2:39
+     * @author 王玉翔
+     */
     public function oauth()
     {
         $app = app('wechat.official_account');
@@ -21,11 +29,44 @@ class AuthController extends Controller
             ->redirect();
     }
 
+    /**
+     * 微信回调后跳转至应用首页
+     *
+     * @create_at 18/5/13 下午2:38
+     * @author 王玉翔
+     */
     public function callback()
     {
         $app = app('wechat.official_account');
         $user = $app->oauth->user();
-        var_dump($user);die;
+        //附带着openid跳转到首页位置
+         $id=$this->getUserInfo($user);
+         var_dump($id);die;
+    }
+
+    /**
+     * 获取JWTToken
+     *
+     * @param $user
+     * @create_at 18/5/13 下午2:41
+     * @author 王玉翔
+     */
+    private function getJWTToken($user)
+    {
+
+    }
+
+    /**
+     * 获取用户信息
+     * 如果openID不存在,则创建新用户,如果存在则返回用户信息
+     *
+     * @create_at 18/5/13 下午2:41
+     * @author 王玉翔
+     */
+    private function getUserInfo($user)
+    {
+         $useAction=new User();
+         return $useAction->findOrCreateUser($user);
     }
 
 }

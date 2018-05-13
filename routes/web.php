@@ -10,12 +10,14 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    \Illuminate\Support\Facades\View::addExtension('html', 'php');
+    return view('index');
 });
 $router->get('/wechat', 'Wechat\WechatController@serve');
-
+$router->get('/test', 'TestController@test');
+// 路由
+$router->post('/auth/login', 'AuthController@postLogin');
 
 $router->get('/oauth', 'Wechat\AuthController@oauth');
 $router->get('/auth/callback', 'Wechat\AuthController@callback');

@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+ $app->withFacades();
 
-// $app->withEloquent();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +81,7 @@ $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 $app->register(Overtrue\LaravelWeChat\ServiceProvider::class);
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
