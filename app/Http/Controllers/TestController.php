@@ -9,7 +9,20 @@
 namespace App\Http\Controllers;
 
 
-class TestController
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
+class TestController extends Controller
 {
+
+    public function test()
+    {
+        return redirect('/');
+        $userModel=new User();
+        $userModel->name='wangyuxiang';
+        $userModel->email='wangyuxiang@km.co';
+        $userModel->password= Hash::make('wangyuxiang');
+        $userModel->save();
+    }
 
 }

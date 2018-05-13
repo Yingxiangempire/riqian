@@ -41,7 +41,7 @@ class AuthController extends Controller
         $user = $app->oauth->user();
         //附带着openid跳转到首页位置
          $id=$this->getUserInfo($user);
-         var_dump($id);die;
+        return redirect('/');
     }
 
     /**
