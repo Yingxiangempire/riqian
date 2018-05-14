@@ -40,7 +40,6 @@ class AuthController extends Controller
         $app = app('wechat.official_account');
         $user = $app->oauth->user();
         //附带着openid跳转到首页位置
-        var_dump([$user->id,$user->name,$user->avatar]);die;
          $id=$this->getUserInfo($user);
         return redirect('/');
     }

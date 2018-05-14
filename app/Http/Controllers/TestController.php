@@ -17,6 +17,11 @@ class TestController extends Controller
 
     public function test()
     {
+        $useAction=new \App\Action\User();
+        return $useAction->addOrUpdateUser(['openid'=>'ssss','password'=>'wangyuxiang']);
+
+
+
         return redirect('/');
         $userModel=new User();
         $userModel->name='wangyuxiang';

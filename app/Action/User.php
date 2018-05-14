@@ -30,9 +30,9 @@ class User extends BaseAction
         $user = $id ? UserModel::find($id) : new UserModel();
         if ($data['openid'] || $data['phone']) {
             if($id){
-                return $user->insertGetId($data);
-            }else{
                 return $user->update($data);
+            }else{
+                return $user->insertGetId($data);
             }
         } else {
             throw new \Exception('用户信息不完整,创建失败');

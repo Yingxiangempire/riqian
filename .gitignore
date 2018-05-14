@@ -21,5 +21,6 @@ composer.lock
 package.json
 phpunit.xml
 .postcssrc.js
+app/Http/Controllers/TestController.php
 
 
