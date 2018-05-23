@@ -51,15 +51,15 @@ class User extends BaseAction
      */
     public function findOrCreateUser($wechatUser)
     {
-        var_dump($wechatUser->id);
-        $user=UserModel::where('openid',$wechatUser->id)->get();
+        $user=UserModel::where('openid',$wechatUser->id)->first()->toArray();
         if($user){
-            return $user->id;
+            return $user['id'];
         }else{
             $data['nick_name']=$wechatUser->nickname;
             $data['password']=Hash::make($wechatUser->id);
             $data['avatar']=$wechatUser->avatar;
             $data['name']=$wechatUser->name;
+            $data['openid']=$wechatUser->id;
             return $this->addOrUpdateUser($data);
         }
     }

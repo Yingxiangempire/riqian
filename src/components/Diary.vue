@@ -1,54 +1,107 @@
 <template>
-  <div>
-   <group>
-      <cell is-link title="日记本" link="/component/tabbar-simple"></cell>
-    </group>
-  </div>
+<div id="flipbook">
+	<div class="hard"> Turn.js </div>
+	<div class="hard"></div>
+	<div> Page 1 </div>
+	<div> Page 2 </div>
+	<div> Page 3 </div>
+	<div> Page 4 </div>
+	<div class="hard"></div>
+	<div class="hard"></div>
+</div>
 </template>
 
 <script>
-import {Group,Cell} from 'vux'
+import jQuery from "jquery"
+
 export default {
-  components: {
-    Group,
-    Cell
+  components: {},
+  created() {
   },
-  data () {
-    return {
-        }
+  mounted(){
+    return this.$nextTick(function () {
+          this.doSomething() 
+      })
+  },
+  methods: {
+    doSomething() {
+        $("#flipbook").turn({
+          width: 400,
+          height: 300,
+          autoCenter: true
+        });
+    }
   }
-}
+};
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-        header {
-            width:100%;
-            height:2rem;
-            position:absolute;
-            z-index:3;
-            top:1;
-        }
-        weather{
-          float:left;
-        }
-        date{
-          float:right;
-        }
-        #main {
-            width:100%;
-            overflow:auto;
-            top:2rem;
-            position:absolute;
-            z-index:10;
-            bottom:2rem;
-        }
-        footer {
-            height:6rem;
-            width:100%;
-            position:absolute;
-            z-index:200;
-            bottom:0;
-            text-align:center;
-        }
+<style >
+  body{
+	overflow:hidden;
+	background-color:#fcfcfc;
+	margin:0;
+	padding:0;
+}
+
+.flipbook-viewport{
+	overflow:hidden;
+	width:100%;
+	height:100%;
+}
+
+.flipbook-viewport .container{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:auto;
+}
+
+.flipbook-viewport .flipbook{
+	width:922px;
+	height:600px;
+	left:-461px;
+	top:-300px;
+}
+
+.flipbook-viewport .page{
+	width:461px;
+	height:600px;
+	background-color:white;
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+}
+
+.flipbook .page{
+	-webkit-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	-ms-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	-o-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.flipbook-viewport .page img{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin:0;
+}
+
+.flipbook-viewport .shadow{
+	-webkit-transition: -webkit-box-shadow 0.5s;
+	-moz-transition: -moz-box-shadow 0.5s;
+	-o-transition: -webkit-box-shadow 0.5s;
+	-ms-transition: -ms-box-shadow 0.5s;
+
+	-webkit-box-shadow:0 0 20px #ccc;
+	-moz-box-shadow:0 0 20px #ccc;
+	-o-box-shadow:0 0 20px #ccc;
+	-ms-box-shadow:0 0 20px #ccc;
+	box-shadow:0 0 20px #ccc;
+}    
 </style>
