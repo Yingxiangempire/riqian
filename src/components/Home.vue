@@ -10,7 +10,7 @@
             <img slot="icon" src="../assets/demo/icon_nav_msg.png">
             <span slot="label">日签圈</span>
           </tabbar-item>
-          <tabbar-item link="/diary">
+          <tabbar-item link="http://diary.yingxiangempire.com">
             <img slot="icon" src="../assets/demo/icon_nav_article.png">
             <span slot="label">日记本</span>
           </tabbar-item>

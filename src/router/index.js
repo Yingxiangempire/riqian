@@ -38,7 +38,9 @@ export default new Router({
     },{
       path: '/diary',
       name: 'diary',
-      component: Diary
+      redirect: to => {
+        return 'http://diary.yingxiangempire.com';
+      }
     },{
       path: '/bbs',
       name: 'bbs',
