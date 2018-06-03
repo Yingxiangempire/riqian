@@ -11,11 +11,17 @@ namespace App\Http\Controllers\Wechat;
 
 use App\Action\User;
 use App\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\Cookie as SCookie;
-
+use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
+    protected $jwt;
+
+    public function __construct(JWTAuth $jwt)
+    {
+        $this->jwt = $jwt;
+    }
     /**
      * 微信授权请求地址
      *
@@ -41,21 +47,23 @@ class AuthController extends Controller
         $app = app('wechat.official_account');
         $user = $app->oauth->user();
         //附带着openid跳转到首页位置
-         $id=$this->getUserInfo($user);
-        
+         $this->getUserInfo($user);
+        dump($this->getJWTToken($user));die;
         return redirect('/?a=c');
     }
 
     /**
-     * 获取JWTToken
+     *  获取JWTToken
      *
      * @param $user
-     * @create_at 18/5/13 下午2:41
+     * @return false|string
+     * @create_at 18/6/3 下午2:42
      * @author 王玉翔
      */
     private function getJWTToken($user)
     {
-
+        $token =$this->jwt->attempt(['openid'=>$user->id,'password'=>Hash::make($user->id)]);
+        return $token;
     }
 
     /**

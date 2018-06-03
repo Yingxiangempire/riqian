@@ -56,10 +56,12 @@ const router= new Router({
 })
 
 router.beforeEach((to, from, next) => {
- 
-  alert(from.params.query);
-  // next();
-  console.log(from);
+  if(to.query.token){
+    window.localStorage.setItem('ACCESS_TOKEN', to.query.token)
+  }
+  if (window.localStorage.ACCESS_TOKEN) { // 如果本地存在 access_token，则继续导航
+    next()
+  }
 })
 
 export default router
