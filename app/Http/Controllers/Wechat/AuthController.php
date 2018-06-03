@@ -48,7 +48,7 @@ class AuthController extends Controller
         $user = $app->oauth->user();
         //附带着openid跳转到首页位置
          $this->getUserInfo($user);
-        dump($this->getJWTToken($user));die;
+        var_dump($this->getJWTToken($user));die;
         return redirect('/?a=c');
     }
 
