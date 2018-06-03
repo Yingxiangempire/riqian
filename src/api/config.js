@@ -1,6 +1,6 @@
 import QS from 'qs'
 export default {
-  baseURL: 'http://riqian.yingxiangempire.com/api/',
+  baseURL: 'https://www.yingxiangempire.com/api/',
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
