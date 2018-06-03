@@ -47,9 +47,9 @@ class AuthController extends Controller
         $app = app('wechat.official_account');
         $user = $app->oauth->user();
         //附带着openid跳转到首页位置
-         $this->getUserInfo($user);
-        var_dump($this->getJWTToken($user));die;
-        return redirect('/?a=c');
+        $this->getUserInfo($user);
+        $token=$this->getJWTToken($user);
+        return redirect('/?token='.$token);
     }
 
     /**
