@@ -22,7 +22,7 @@ class IndexController extends Controller
     public function request()
     {
         header("Access-Control-Allow-Origin: *");
-        var_dump(Auth::user());
+        var_dump(Auth::user()->toArray());
         var_dump(Request::header('Authorization'));die;
     }
     
