@@ -46,7 +46,7 @@ export default {
           html: '<img src="src/img/7.png" alt="07">'
         }
       ]
-    }, 2000)
+    }, 20)
   },
   components: {
     stack
