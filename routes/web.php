@@ -35,4 +35,8 @@ $router->post('/api/post', function () use ($router) {
     return json_encode(['data'=>['imageUrl'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
 });
 
-$router->get('/api/locationAndWeather', 'IndexController@request');
+$router->group(['middleware' => 'auth:api'], function($router)
+{
+    $router->get('/api/locationAndWeather', 'IndexController@request');
+});
+

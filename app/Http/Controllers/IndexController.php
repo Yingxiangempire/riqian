@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpFoundation\Cookie as SCookie;
+use Auth;
 class IndexController extends Controller
 {
     public function index()
@@ -21,7 +22,7 @@ class IndexController extends Controller
     public function request()
     {
         header("Access-Control-Allow-Origin: *");
-        var_dump('aaa');
+        var_dump(Auth::user());
         var_dump(Request::header('Authorization'));die;
     }
     
