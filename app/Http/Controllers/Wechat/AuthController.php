@@ -62,7 +62,7 @@ class AuthController extends Controller
      */
     private function getJWTToken($user)
     {
-        $token =$this->jwt->attempt(['openid'=>$user->id,'password'=>Hash::make($user->id)]);
+        $token =$this->jwt->attempt(['openid'=>$user->id,'password'=>$user->id]);
         return $token;
     }
 
