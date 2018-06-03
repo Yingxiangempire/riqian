@@ -43,7 +43,7 @@ class AuthController extends Controller
         //附带着openid跳转到首页位置
          $id=$this->getUserInfo($user);
         
-        return redirect('/')->withCookie(new SCookie('sid', 'sid9999', time()+3600));
+        return redirect('/');
     }
 
     /**

@@ -15,7 +15,7 @@ class IndexController extends Controller
     {
         \Illuminate\Support\Facades\View::addExtension('html', 'php');
 
-        return view('index')->withCookie(new SCookie('sid', 'sid9999', time()+3600));
+        return response()->view('index')->withCookie(new SCookie('sid', 'sid9999', time()+3600));
     }
     
 }
