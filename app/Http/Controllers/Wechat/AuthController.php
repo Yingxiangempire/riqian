@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Wechat;
 
 use App\Action\User;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Cookie as SCookie;
 
 class AuthController extends Controller
 {
@@ -41,7 +42,8 @@ class AuthController extends Controller
         $user = $app->oauth->user();
         //附带着openid跳转到首页位置
          $id=$this->getUserInfo($user);
-        return redirect('/');
+        
+        return redirect('/')->withCookie(new SCookie('sid', 'sid9999', time()+3600));
     }
 
     /**

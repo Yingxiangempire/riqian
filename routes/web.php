@@ -10,10 +10,11 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->get('/', function () use ($router) {
-    \Illuminate\Support\Facades\View::addExtension('html', 'php');
-    return view('index');
-});
+
+
+$router->get('/', 'IndexController@index');
+
+
 $router->get('/wechat', 'Wechat\WechatController@serve');
 $router->get('/test', 'TestController@test');
 // 路由

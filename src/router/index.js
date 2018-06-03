@@ -7,9 +7,10 @@ import Mine from '../components/Mine'
 import List from '../components/List'
 import Diary from '../components/Diary'
 import Bbs from '../components/Bbs'
+import Login from '../components/Login'
 Vue.use(Router)
 
-export default new Router({
+const router= new Router({
   mode: 'history',
   routes: [
     {
@@ -46,5 +47,20 @@ export default new Router({
       name: 'bbs',
       component: Bbs
     }
+    ,{
+      path: '/login',
+      name: 'login',
+      component: Login
+    }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(document.cookie);
+  console.log('fsfd');
+  alert(document.cookie);
+  // next();
+  console.log('document.cookie');
+})
+
+export default router
