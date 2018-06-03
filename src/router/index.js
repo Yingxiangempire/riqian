@@ -56,11 +56,10 @@ const router= new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(document.cookie);
-  console.log('fsfd');
-  alert(document.cookie);
+ 
+  alert(from.params.query);
   // next();
-  console.log('document.cookie');
+  console.log(from);
 })
 
 export default router
