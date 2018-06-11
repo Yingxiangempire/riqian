@@ -1,59 +1,50 @@
 <template>
   <div>
-   <timeline>
-        			<timeline-item>
-                      <router-link to="/editor">
-                        <x-icon type="ios-plus" size="60"></x-icon>
-                       </router-link>
-        			</timeline-item>
-        			<timeline-item>
-        				<panel  :header="imageUrl" :list="list" type="1">
-                                  				 </panel>
-        			</timeline-item>
-        		</timeline>
+    <div v-for="src in list" style="background-color:yellow;text-align:center;">
+      <span style="font-size:20px;">Loading</span>
+      <x-img :src="src" :webp-src="`${src}?type=webp`" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
+    </div>
   </div>
 </template>
 
 <script>
-import {Timeline, TimelineItem, Panel} from 'vux'
+import { XImg } from 'vux'
 export default {
   components: {
-    Timeline,
-    TimelineItem,
-     Panel
+    XImg
+  },
+  methods: {
+    success (src, ele) {
+      console.log('success load', src)
+      const span = ele.parentNode.querySelector('span')
+      ele.parentNode.removeChild(span)
+    },
+    error (src, ele, msg) {
+      console.log('error load', msg, src)
+      const span = ele.parentNode.querySelector('span')
+      span.innerText = 'load error'
+    }
   },
   data () {
     return {
-          imageUrl:''
-        }
-  },
-  mounted() {
-   this.imageUrl=this.$route.params.imageUrl;
-  },
+      list: [
+        this.$route.params.imageUrl
+      ]
+    }
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
+<style>
+.ximg-demo {
+  width: 100%;
+  height: auto;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.ximg-error {
+  background-color: yellow;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.cell-x-icon {
-  display: block;
-  fill: green;
-}
-.vux-x-icon {
-  fill: green;
+.ximg-error:after {
+  content: '加载失败';
+  color: red;
 }
 </style>

@@ -1,8 +1,11 @@
 <template>
   <div>
-<header><span class="weather" >天气：{{post.post.weather}}</span><span class="date">日期：2018/4/5</span><hr/></header>
+  
+<header><input class="weather" v-model="post.post.weather" hidden/>天气：{{post.post.weather}}<span class="date">日期：2018/4/5</span><hr/></header>
 <div id="main" class="input">
-  <uploader :max="varmax" :images="images"
+  <uploader :max="varmax"
+    :images="images"
+    v-model="post.post.images"
     :handle-click="false"
     :show-header="true"
     :readonly="false"
@@ -15,39 +18,57 @@
     @remove-image="removeImageMethod"
   ></uploader>
     <div class="mycontent">
-     <textarea class="input" rows="5" cols="50"></textarea>
+     <textarea class="input" rows="5" cols="50"  v-model="post.post.content"></textarea>
          </div>
         </div>
-    <footer><hr />标签：生活          <x-button :text="submit001" :disabled="disable001" @click.native="createPost" type="primary">保存</x-button>         位置：{{post.post.location}}</footer>
+
+    <footer>  
+                       <group >
+        <selector placeholder="请选择标签" v-model="post.post.tag" title="标签" name="district" :options="tag" ></selector>
+    </group>  
+     <x-button :text="submit001" :disabled="disable001" @click.native="createPost" type="primary">保存</x-button> 
+            位置：{{post.post.location}}</footer>
 　　</div>
+
 </template>
 
 <script>
-import {Divider,XButton} from 'vux'
+import {Divider,XButton,Selector, Group,Cell, CellBox} from 'vux'
 import Uploader from 'vux-uploader'
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
     components: {
+          Group,
       Divider,
       XButton,
-      Uploader
+      Uploader,
+      Selector,
+      Cell, 
+      CellBox
   },
   data () {
     return {
-     post:this.$store.state.post
+     post:this.$store.state.post,
+     tag:this.$store.state.post.tag
     }
   },
      methods: {
+      
      createPost() {
       this.$store.dispatch({
         type: "updatePost"
       }).then(res=>{this.$router.push({ name: 'post', params: { imageUrl: res }})});
     }
      },
-     mounted(){
+     beforeCreate(){
         this.$store.dispatch({
-        type: "getLocationAndWeather"
-      });
+         type: "getLocationAndWeather"
+      }
+      );
+          this.$store.dispatch({
+          type: "getTags"
+      }
+      );
      },
   props: {
     images: {
@@ -86,7 +107,7 @@ export default {
     },
     uploadUrl: {
       type: String,
-      default: "http://riqian.yingxiangempire.com/editor"
+      default: "http://riqian.yingxiangempire.com/api/image"
     },
     size: {
       type: String,

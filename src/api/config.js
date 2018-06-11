@@ -1,13 +1,13 @@
 import QS from 'qs'
 export default {
-  baseURL: 'https://www.yingxiangempire.com/api/',
+  baseURL: '/api/',
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Accept': 'application/json'
   },
   params: {},
-  timeout: 10000,
+  timeout: 100000,
   withCredentials: false,
   responseType: 'json',
   maxContentLength: 2000,

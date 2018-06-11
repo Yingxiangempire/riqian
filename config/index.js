@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api':{
+        target: 'http://riqian.yingxiangempire.com:80',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': 'http://riqian.yingxiangempire.com:80/api'
+        }
+    }
+    },
 
     // Various Dev Server settings
     host: 'riqian.yingxiangempire.com', // can be overwritten by process.env.HOST

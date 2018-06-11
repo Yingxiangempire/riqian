@@ -11,7 +11,6 @@
 |
 */
 
-
 $router->get('/', 'IndexController@index');
 
 
@@ -23,20 +22,32 @@ $router->post('/auth/login', 'AuthController@postLogin');
 $router->get('/oauth', 'Wechat\AuthController@oauth');
 $router->get('/auth/callback', 'Wechat\AuthController@callback');
 
-$router->post('/editor', function () use ($router) {
-    header("Access-Control-Allow-Origin: *");
-    return json_encode(['data'=>['url'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
-});
+//$router->post('/api/image', function () use ($router) {
+//    header("Access-Control-Allow-Origin: *");
+//    return json_encode(['result'=>0,'data'=>['url'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
+//});
+
+//$router->post('/api/locationAndWeather', function () use ($router) {
+//    header("Access-Control-Allow-Origin: *");
+//    return json_encode(['data'=>['weather'=>'晴朗','location'=>'张江高科']]);
+//});
+
+//$router->post('/api/post', function () use ($router) {
+//    header("Access-Control-Allow-Origin: *");
+//    return json_encode(['data'=>['imageUrl'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
+//});
 
 
+$router->post('/api/post', 'PostController@add');
+$router->post('/api/locationAndWeather', 'IndexController@request');
 
-$router->post('/api/post', function () use ($router) {
-    header("Access-Control-Allow-Origin: *");
-    return json_encode(['data'=>['imageUrl'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
-});
+$router->post('/api/image', 'IndexController@imageUpload');
 
-$router->group(['middleware' => 'auth:api'], function($router)
-{
-    $router->get('/api/locationAndWeather', 'IndexController@request');
-});
+$router->post('/api/tags', 'IndexController@tags');
 
+//$router->group(['middleware' => 'auth:api'], function($router)
+//{
+//    $router->post('/api/post', 'PostController@add');
+//});
+
+$router->get('/hope','ImageconductController@getHopePic');

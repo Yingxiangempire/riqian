@@ -15,18 +15,27 @@ const state = {
 // getters
 const getters = {
     post:state=>state.post,
+    tag:state=>state.tag,
     redirect:state=>state.redirect
 }
 
 // actions
 const actions = {
     async getLocationAndWeather({commit}){
-        api.get('locationAndWeather').then(response => {
+        api.post('locationAndWeather').then(response => {
             console.log(response.data.data);
             state.post.weather=response.data.data.weather;
             state.post.location=response.data.data.location;
           }).catch(error => {
-          alert('获取位置信息失败');
+            alert('获取位置信息失败');
+          })
+    },
+    async getTags({commit}){
+        api.post('tags').then(response => {
+            state.tag=[].slice.call(response.data);
+            console.log(response.data);
+          }).catch(error => {
+            alert('获取标签信息失败');
           })
     },
     updatePost ({commit}) {
