@@ -107,7 +107,7 @@ export default {
     },
     uploadUrl: {
       type: String,
-      default: "http://www.yingxiangempire.com/api/image"
+      default: "http://114.215.134.80/api/image"
     },
     size: {
       type: String,
