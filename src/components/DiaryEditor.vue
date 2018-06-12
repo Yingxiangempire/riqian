@@ -107,7 +107,7 @@ export default {
     },
     uploadUrl: {
       type: String,
-      default: "http://riqian.yingxiangempire.com/api/image"
+      default: "http://www.yingxiangempire.com/api/image"
     },
     size: {
       type: String,
