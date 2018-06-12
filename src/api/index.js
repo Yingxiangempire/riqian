@@ -7,7 +7,6 @@ let api = axios.create(config)
 // http request 拦截器
 api.interceptors.request.use(config => {
   if (window.localStorage.ACCESS_TOKEN) {
-    alert(window.localStorage.ACCESS_TOKEN);
     config.headers.Authorization = 'Bearer ' + window.localStorage.ACCESS_TOKEN
   }
   return config
