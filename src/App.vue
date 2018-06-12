@@ -1,23 +1,17 @@
 <template>
   <div id="app">
-        <x-header>This is the page title.</x-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { XHeader} from 'vux'
 export default {
-  name: 'app',
-    components: {
-    XHeader
-  }
+  name: 'app'
 }
 </script>
 
 <style lang="less">
 @import '~vux/src/styles/reset.less';
-@header-background-color: #000;
 body {
   background-color: #fbf9fe;
 }
