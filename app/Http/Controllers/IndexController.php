@@ -41,7 +41,7 @@ class IndexController extends Controller
         header("Access-Control-Allow-Origin: *");
 
         $file = Request::file('img');
-        $uploadPath = 'userImage/8';
+        $uploadPath = 'userImage/7';
         if (!Storage::exists($uploadPath)) {
             Storage::makeDirectory($uploadPath, 0777, true, true);
         }
