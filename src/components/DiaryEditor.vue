@@ -1,11 +1,11 @@
 <template>
   <div>
   
-<header><input class="weather" v-model="post.post.weather" hidden/>天气：{{post.post.weather}}<span class="date">日期：2018/4/5</span><hr/></header>
+<header><input class="weather" v-model="post.weather" hidden/>天气：{{post.weather}}<span class="date">日期：2018/4/5</span><hr/></header>
 <div id="main" class="input">
   <uploader :max="varmax"
     :images="images"
-    v-model="post.post.images"
+    v-model="post.images"
     :handle-click="false"
     :show-header="true"
     :readonly="false"
@@ -13,21 +13,20 @@
     name="img"
     :params="params"
     size="small"
-    @preview="previewMethod"
     @add-image="addImageMethod"
     @remove-image="removeImageMethod"
   ></uploader>
     <div class="mycontent">
-     <textarea class="input" rows="5" cols="50"  v-model="post.post.content"></textarea>
+     <textarea class="input" rows="5" cols="50"  v-model="post.content"></textarea>
          </div>
         </div>
 
     <footer>  
-                       <group >
-        <selector placeholder="请选择标签" v-model="post.post.tag" title="标签" name="district" :options="tag" ></selector>
+    <group >
+        <selector placeholder="请选择标签" v-model="post.tag" title="标签" name="district" :options="tag" ></selector>
     </group>  
-     <x-button :text="submit001" :disabled="disable001" @click.native="createPost" type="primary">保存</x-button> 
-            位置：{{post.post.location}}</footer>
+     <x-button  @click.native="createPost" type="primary">保存</x-button> 
+            位置：{{post.location}}</footer>
 　　</div>
 
 </template>
@@ -38,7 +37,7 @@ import Uploader from 'vux-uploader'
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
     components: {
-          Group,
+      Group,
       Divider,
       XButton,
       Uploader,
@@ -48,28 +47,32 @@ export default {
   },
   data () {
     return {
-     post:this.$store.state.post,
-     tag:this.$store.state.post.tag
     }
   },
-     methods: {
-      
+  methods: {
      createPost() {
       this.$store.dispatch({
         type: "updatePost"
       }).then(res=>{this.$router.push({ name: 'post', params: { imageUrl: res }})});
     }
-     },
-     beforeCreate(){
-        this.$store.dispatch({
-         type: "getLocationAndWeather"
-      }
-      );
-          this.$store.dispatch({
+  },
+
+   computed: {
+    ...mapGetters([
+      'tag',
+      'post'
+    ])
+  },
+  created(){
+     this.$store.dispatch({
           type: "getTags"
       }
       );
-     },
+      this.$store.dispatch({
+         type: "getLocationAndWeather"
+      }
+      );
+  },
   props: {
     images: {
       type: Array,

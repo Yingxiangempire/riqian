@@ -9,6 +9,7 @@ const state = {
         content:'',
         tag:''
     },
+    tag:[],
     redirect:''
 }
 
@@ -23,7 +24,6 @@ const getters = {
 const actions = {
     async getLocationAndWeather({commit}){
         api.post('locationAndWeather').then(response => {
-            console.log(response.data.data);
             state.post.weather=response.data.data.weather;
             state.post.location=response.data.data.location;
           }).catch(error => {
@@ -33,7 +33,6 @@ const actions = {
     async getTags({commit}){
         api.post('tags').then(response => {
             state.tag=[].slice.call(response.data);
-            console.log(response.data);
           }).catch(error => {
             alert('获取标签信息失败');
           })
@@ -49,16 +48,7 @@ const actions = {
 
 // mutations
 const mutations = {
-    setPost (state, {val}) {
-        console.log(val)
-        Object.keys(val).map(key => {
-            Vue.set(state.post, key, val[key])
-        })
-    },
-    updatePost (state, {key, val}) {
-        Vue.set(state.post, key, val)
-        console.log(state.post)
-    }
+    
 }
 
 export default {
