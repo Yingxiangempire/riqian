@@ -391,7 +391,7 @@ class ImageConduct
 
         $editor->save($imageMain, base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd').'tag.png');
         $upload = new UploadToQiNiu();
-        $result=$upload->uploadThroughPath(base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd')."tag.png", $key.date('Ymds'));
+        $result=$upload->uploadThroughPath(base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd')."tag.png", $key.date('Ymd'));
         return $result;
     }
 

@@ -16,9 +16,27 @@ use App\Http\Controllers\Service\ImageConduct;
 class PostController extends AuthedBaseController
 {
 
+
+    public function myList(){
+//        $page=$this->getInput('page','1');
+        $page=1;
+        $data=Post::getUserPostList($page,$this->user['id']);
+        return $this->apiReturn($data);
+    }
+
+    /**
+     * 获取日签图片列表(分页)
+     *
+     * @return mixed
+     * @create_at 18/6/16 下午1:51
+     * @author 王玉翔
+     */
     public function index()
     {
-        
+//        $page=$this->getInput('page','1');
+        $page=1;
+        $data=Post::getPostList($page);
+        return $this->apiReturn($data);
     }
 
     /**

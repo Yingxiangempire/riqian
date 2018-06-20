@@ -45,6 +45,7 @@
 
 <script>
 import {Group,Cell,Panel} from 'vux'
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   components: {
     Group,
@@ -53,15 +54,25 @@ export default {
   },
   data () {
    return {
-          header:"2018/4/5",
           type: '5',
           list: [ {
-            title: 'YingxiangEmpire',
-            src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-            desc: '微信号:XJTLU_Liverpool',
+            title:this.$store.getters.user.name,
+            src: this.$store.getters.user.avatar,
+            desc: this.$store.getters.user.nick_name,
           }]
         }
-  }
+  },
+  created(){
+     this.$store.dispatch({
+          type: "getUserInfo"
+      }
+      )
+  },
+  computed: {
+    ...mapGetters([
+      'user'
+    ])
+  },
 }
 </script>
 

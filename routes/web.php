@@ -11,43 +11,32 @@
 |
 */
 
-$router->get('/', 'IndexController@index');
+$router->get('/', 'IndexController@index');//入口
 
 
-$router->get('/wechat', 'Wechat\WechatController@serve');
-$router->get('/test', 'TestController@test');
-// 路由
-$router->post('/auth/login', 'AuthController@postLogin');
+/*************************************微信相关接口**************************************/
+$router->get('/wechat', 'Wechat\WechatController@serve');//微信测试
+$router->post('/auth/login', 'AuthController@postLogin');//登陆接口
+$router->get('/oauth', 'Wechat\AuthController@oauth');//微信授权入口
+$router->get('/auth/callback', 'Wechat\AuthController@callback');//微信授权回调
+/*************************************微信相关接口end**********************************/
 
-$router->get('/oauth', 'Wechat\AuthController@oauth');
-$router->get('/auth/callback', 'Wechat\AuthController@callback');
-
-//$router->post('/api/image', function () use ($router) {
-//    header("Access-Control-Allow-Origin: *");
-//    return json_encode(['result'=>0,'data'=>['url'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
-//});
-
-//$router->post('/api/locationAndWeather', function () use ($router) {
-//    header("Access-Control-Allow-Origin: *");
-//    return json_encode(['data'=>['weather'=>'晴朗','location'=>'张江高科']]);
-//});
-
-//$router->post('/api/post', function () use ($router) {
-//    header("Access-Control-Allow-Origin: *");
-//    return json_encode(['data'=>['imageUrl'=>'http://7xj8z5.com1.z0.glb.clouddn.com/0a8a8e30047169616d3c75749e64c579bfe2a425']]);
-//});
-
-
-$router->post('/api/post', 'PostController@add');
-$router->post('/api/locationAndWeather', 'IndexController@request');
-
-$router->post('/api/image', 'IndexController@imageUpload');
-
-$router->post('/api/tags', 'IndexController@tags');
+/*************************************接口**********************************************/
+$router->post('/api/post', 'PostController@add');//发表日签
+$router->get('/api/post', 'PostController@index');//获取日签列表
+$router->post('/api/locationAndWeather', 'IndexController@request');//获取地点与天气
+$router->post('/api/image', 'IndexController@imageUpload');//添加图片
+$router->post('/api/tags', 'IndexController@tags');//获取标签
+$router->get('/api/userInfo', 'AuthedBaseController@getUserInfo');//获取用户信息
+/*************************************接口end*******************************************/
 
 //$router->group(['middleware' => 'auth:api'], function($router)
 //{
 //    $router->post('/api/post', 'PostController@add');
 //});
-
+/*************************************测试**********************************************/
 $router->get('/hope','ImageconductController@getHopePic');
+$router->get('/test', 'TestController@test');//测试入口
+/*************************************测试end*******************************************/
+
+

@@ -10,14 +10,18 @@ const state = {
         tag:''
     },
     tag:[],
-    redirect:''
+    redirect:'',
+    list:[],
+    myList:[]
 }
 
 // getters
 const getters = {
     post:state=>state.post,
     tag:state=>state.tag,
-    redirect:state=>state.redirect
+    redirect:state=>state.redirect,
+    list:state=>state.list,
+    myList:state=>state.myList
 }
 
 // actions
@@ -37,6 +41,27 @@ const actions = {
             alert('获取标签信息失败');
           })
     },
+    async getList({commit},page){
+        console.log(page.page)
+        api.get('post?page='+page.page).then(response => {
+            state.list=response.data.data;
+            response.data.data.map((item,key)=>
+            state.list[key]={'html':'<img src='+item+' alt='+key +'>'}
+           );
+          }).catch(error => {
+            alert('获取日签列表信息失败');
+          })
+    },
+    async getMyList({commit},page){
+        api.get('myPost?page='+page.page).then(response => {
+            state.list=response.data.data;
+            response.data.data.map((item,key)=>
+            state.list[key]={'html':'<img src='+item+' alt='+key +'>'}
+           );
+          }).catch(error => {
+            alert('获取日签列表信息失败');
+          })
+    },
     updatePost ({commit}) {
        return api.post('post', state.post).then(response => {
               return response.data.data.imageUrl;
@@ -48,7 +73,7 @@ const actions = {
 
 // mutations
 const mutations = {
-    
+
 }
 
 export default {

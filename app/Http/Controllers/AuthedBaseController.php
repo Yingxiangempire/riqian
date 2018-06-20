@@ -17,12 +17,25 @@ class AuthedBaseController extends Controller
     public $user;
 
     /**
+     * 获取用户信息
+     *
+     * @create_at 18/6/19 下午9:04
+     * @author 王玉翔
+     */
+    public function getUserInfo()
+    {
+        return $this->apiReturn($this->user);
+    }
+
+
+
+    /**
      * AuthedBaseController constructor.
      */
     public function __construct()
     {
-        $this->user=Auth::user()->toArray();
-//        $this->user=User::find(8)->toArray();
+//        $this->user=Auth::user()->toArray();
+        $this->user=User::find(8)->toArray();
     }
 
     /**

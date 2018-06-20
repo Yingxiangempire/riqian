@@ -1,7 +1,7 @@
 <template>
   <div class="mid-center">
     <div class="stack-wrapper">
-      <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
+      <stack ref="stack" :pages="list" :stackinit="stackinit"></stack>
     </div>
     <div class="controls">
       <button @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
@@ -11,54 +11,55 @@
 </template>
 <script>
 import stack from 'vue-tantan-stack'
+import { mapState, mapActions, mapGetters } from "vuex"
 export default {
   data () {
     return {
       someList: [],
       stackinit: {
         visible: 3
-      }
+      },
+      page:1
     }
   },
   mounted () {
-    let that = this
-    setTimeout(function () {
-      that.someList = [
-        {
-          html: '<img src="/src/assets/demo/1.jpg" alt="01">'
-        },
-        {
-          html: '<img src="/src/assets/demo/2.jpg" alt="02">'
-        },
-        {
-          html: '<img src="/src/assets/demo/3.jpg" alt="03">'
-        },
-        {
-          html: '<img src="src/img/4.png" alt="04">'
-        },
-        {
-          html: '<img src="src/img/5.png" alt="05">'
-        },
-        {
-          html: '<img src="src/img/6.png" alt="06">'
-        },
-        {
-          html: '<img src="src/img/7.png" alt="07">'
-        }
-      ]
-    }, 20)
   },
   components: {
     stack
   },
+  computed: {
+    ...mapGetters([
+      'list'
+    ])
+  },
   methods: {
     prev () {
-      this.$refs.stack.$emit('prev')
+      this.$refs.stack.$emit('prev');
+      let currentpage =this.$refs.stack._data.temporaryData.currentPage
+      if(currentpage==0){ 
+      this.page=this.page +1
+         this.$store.dispatch({
+          type: "getList",page:this.page
+      });  
+      }
     },
     next () {
-      this.$refs.stack.$emit('next')
-    }
+      this.$refs.stack.$emit('next');
+      let currentpage =this.$refs.stack._data.temporaryData.currentPage
+      if(currentpage==0){ 
+      this.page=this.page +1
+         this.$store.dispatch({
+          type: "getList",page:this.page
+      });  
+      }
+    },
+  },
+  created(){
+     this.$store.dispatch({
+          type: "getList",page:this.page
+      });  
   }
+ 
 }
 </script>
 <style>
