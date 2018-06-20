@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel :list="list" type="1"></panel>
+    <panel :list="user" type="1"></panel>
 
    <group title="应用设置">
           <router-link to="/diary">
@@ -54,12 +54,7 @@ export default {
   },
   data () {
    return {
-          type: '5',
-          list: [ {
-            title:this.$store.getters.user.name,
-            src: this.$store.getters.user.avatar,
-            desc: this.$store.getters.user.nick_name,
-          }]
+        
         }
   },
   created(){

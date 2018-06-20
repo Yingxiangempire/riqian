@@ -42,7 +42,6 @@ const actions = {
           })
     },
     async getList({commit},page){
-        console.log(page.page)
         api.get('post?page='+page.page).then(response => {
             state.list=response.data.data;
             response.data.data.map((item,key)=>

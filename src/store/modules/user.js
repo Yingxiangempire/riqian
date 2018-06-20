@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import api from '../../api/index'
 const state = {
-    user: {}
+    user: []
 }
 
 // getters
@@ -14,7 +14,10 @@ const getters = {
 const actions = {
     async getUserInfo({commit}){
         api.get('userInfo').then(response => {
-            state.user=response.data.data;
+             state.user=[{
+                 'title':response.data.data.name,
+                 'src':response.data.data.avatar,
+                'desc':response.data.data.nick_name}]
           }).catch(error => {
             alert('获取用户信息失败');
           })
