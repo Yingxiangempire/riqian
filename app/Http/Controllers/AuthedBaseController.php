@@ -34,8 +34,8 @@ class AuthedBaseController extends Controller
      */
     public function __construct()
     {
-//        $this->user=Auth::user()->toArray();
-        $this->user=User::find(8)->toArray();
+        $this->user=Auth::user()->toArray();
+//        $this->user=User::find(8)->toArray();
     }
 
     /**
