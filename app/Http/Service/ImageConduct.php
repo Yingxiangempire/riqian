@@ -25,7 +25,7 @@ class ImageConduct
         $this->editor->fill($this->mainImg, new Color('#ba8448'));
     }
 
-    public function getPicKey($userId, $tag, $weather, $location, $subcontent)
+    public function getPicKey($userId, $tag, $weather, $location, $subcontent,$postfix)
     {
         switch ($tag) {
             case 1:
@@ -41,7 +41,7 @@ class ImageConduct
 
                 break;
             default:
-                return $this->getHopePic($userId, $tag, $weather, $location, $subcontent);
+                return $this->getHopePic($userId, $tag, $weather, $location, $subcontent,$postfix);
                 break;
         }
     }
@@ -84,7 +84,6 @@ class ImageConduct
         $editor->blend($imageMain, $underline, 'normal', 1, 'bottom-left', 300, -140);
         $editor->blend($imageMain, $underline, 'normal', 1, 'bottom-left', 300, -190);
         $editor->blend($imageMain, $underline, 'normal', 1, 'bottom-left', 300, -240);
-
         $editor->text($imageMain, '清明时节雨纷纷，', 18, 350, 690, new Color('#130c0e'), base_path('Image') . '/ttf/hand.ttf',
             0);
         $editor->text($imageMain, '路上行人欲断魂。', 18, 350, 740, new Color('#130c0e'), base_path('Image') . '/ttf/hand.ttf',
@@ -93,8 +92,6 @@ class ImageConduct
             0);
         $editor->text($imageMain, '牧童遥指杏花村.', 18, 350, 840, new Color('#130c0e'), base_path('Image') . '/ttf/hand.ttf',
             0);
-
-
         $editor->save($imageMain, base_path('Image') . '/locations.png');
         $im = @imagecreatefrompng(base_path('Image') . '/locations.png');
         ob_start();
@@ -329,7 +326,7 @@ class ImageConduct
     }
 
 
-    public function getHopePic($key, $tag, $weather, $locations, $subcontent)
+    public function getHopePic($key, $tag, $weather, $locations, $subcontent,$postfix)
     {
         $data = ["weather" => "晴", "city" => "上海", "img" => "0"];
         $editor = Grafika::createEditor();
@@ -337,7 +334,7 @@ class ImageConduct
         $editor->fill($imageMain, new Color('#FFFFFF'));
 
         //获取主图并合并至主图
-        $editor->open($inputImage,base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd').'.png');
+        $editor->open($inputImage,base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd').'.'.$postfix);
         $editor->resizeFill($inputImage, 640, 500);
         $editor->blend($imageMain, $inputImage, 'normal', 9, 'top-center', 0, 0);
         //添加日期

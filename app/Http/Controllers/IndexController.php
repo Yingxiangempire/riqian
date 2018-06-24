@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Cookie as SCookie;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
-class IndexController extends Controller
+class IndexController extends AuthedBaseController
 {
     public function index()
     {
@@ -39,9 +39,8 @@ class IndexController extends Controller
     public function imageUpload()
     {
         header("Access-Control-Allow-Origin: *");
-
         $file = Request::file('img');
-        $uploadPath = 'userImage/7';
+        $uploadPath = 'userImage/'.$this->user['id'];
         if (!Storage::exists($uploadPath)) {
             Storage::makeDirectory($uploadPath, 0777, true, true);
         }

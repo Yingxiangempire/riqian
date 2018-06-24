@@ -9,11 +9,12 @@
     :handle-click="false"
     :show-header="true"
     :readonly="false"
+    :autoUpload="false"
     :upload-url="uploadUrl"
     name="img"
     :params="params"
     size="small"
-    @add-image="addImageMethod"
+    @upload-image="ad"
     @remove-image="removeImageMethod"
   ></uploader>
     <div class="mycontent">
@@ -54,6 +55,17 @@ export default {
       this.$store.dispatch({
         type: "updatePost"
       }).then(res=>{this.$router.push({ name: 'post', params: { imageUrl: res }})});
+    },
+    ad: function (formData) {
+     if (this.$vux && this.$vux.loading) {
+          this.$vux.loading.show('正在上传')
+        }
+       this.$store.dispatch({
+          type: "updateImage",data:formData
+      }).then((response) => {
+          console.log(response.data.data);
+          this.images.push(response.data.data)
+        })
     }
   },
 

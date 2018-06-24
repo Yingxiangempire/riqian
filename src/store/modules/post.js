@@ -1,6 +1,7 @@
 // initial state
 import Vue from 'vue'
 import api from '../../api/index'
+import axios from 'axios'
 const state = {
     post: {
         weather:'',
@@ -67,7 +68,15 @@ const actions = {
           }).catch(error => {
               alert('失败');
           })
-    }
+    },
+    updateImage ({commit},s) {
+        return axios.post('api/image', s.data,{headers:{'Content-Type': 'multipart/form-data;charset=utf-8;','Authorization' : 'Bearer ' + window.localStorage.ACCESS_TOKEN}}).then(response => {
+            state.post.images= response.data.data.url  
+            return response;
+           }).catch(error => {
+               alert('失败');
+           })
+     }
 }
 
 // mutations

@@ -41,7 +41,7 @@ class Post extends BaseAction
        key_exists('is_public',$data)?($post->is_public=$data['is_public']):'';
        //创建日签获取日签图片地址
        $image=new ImageConduct();
-       $key= $image->getPicKey($data['user_id'],$data['tag'],$data['weather'],$data['location'],$subContent);
+       $key= $image->getPicKey($data['user_id'],$data['tag'],$data['weather'],$data['location'],$subContent,$data['postfix']);
        $post->pic=$key;
        $post->save();
        //添加发表过日签用户的纪录

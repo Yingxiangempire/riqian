@@ -53,6 +53,8 @@ class PostController extends AuthedBaseController
         $data['weather']=$this->getInputOrFail('weather');
         $data['location']=$this->getInputOrFail('location');
         $data['tag']=$this->getInputOrFail('tag');
+        $image=explode('.',$this->getInputOrFail('images'));
+        $data['postfix']=end($image);
         $data['content']=$this->getInputOrFail('content');
         $data['is_public']=$this->getInput('is_public',1);
         //创建生成图片
