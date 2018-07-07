@@ -123,7 +123,7 @@ class Post extends BaseAction
     public function addPostUserRecord($userId)
     {
         //todo 缓存页数缓存用户,直接添加或更新
-        $record=PostUserRecord::where('date',strtotime(date('Y-m-d')))->select(['users'])->orderBy('page','DESC')->first();
+        $record=PostUserRecord::where('date',strtotime(date('Y-m-d')))->select(['users'])->orderBy('page','DESC')->get();
         if($record){
             $users=json_decode($record->users,true);
             $page=$record->page;
