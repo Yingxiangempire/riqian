@@ -61,6 +61,9 @@ export default {
               }
        })
         });
+        this.$wechat.error(function(){
+          alert('你妹');
+        });
        
         });
   }
