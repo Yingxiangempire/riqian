@@ -50,8 +50,9 @@ export default {
         this.$wechat.ready(function(){
  this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
-              link:'https://www.yingxiangempire.com',
-              imageUrl:'',
+              desc:'我已经在映像日记平台坚持写日记20天',
+              link:'https://www.yingxiangempire.com/aa',
+              imageUrl:'http://css.tools.chinaz.com/tools/images/public/logos/logo-index.png',
               success:function(){
                 alert('分享成功')
               },
