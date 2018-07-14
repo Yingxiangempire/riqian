@@ -53,10 +53,10 @@ export default {
               link:'https://www.yingxiangempire.com',
               imageUrl:'',
               success:function(){
-                console.log('分享成功')
+                alert('分享成功')
               },
               cancel:function(){
-                console.log('分享失败')
+                alert('分享失败')
               }
        })
         });
