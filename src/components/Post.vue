@@ -5,6 +5,7 @@
       <x-img :src="src" :webp-src="`${src}?type=webp`" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -45,11 +46,21 @@ export default {
         type: "getWeixinConfig"
       }).then(res =>{
         Vue.wechat.config(res);
-        this.$wechat.onMenuShareTimeline({
+        console.log(this.$wechat);
+        this.$wechat.ready(function(){
+ this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
               link:'https://www.yingxiangempire.com',
-              
+              imageUrl:'',
+              success:function(){
+                console.log('分享成功')
+              },
+              cancel:function(){
+                console.log('分享失败')
+              }
        })
+        });
+       
         });
   }
 }

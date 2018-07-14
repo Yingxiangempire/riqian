@@ -7,7 +7,8 @@ import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import App from './App'
 import router from './router/index'
-
+import { WechatPlugin } from 'vux'
+Vue.use(WechatPlugin)
 
 
 FastClick.attach(document.body)
