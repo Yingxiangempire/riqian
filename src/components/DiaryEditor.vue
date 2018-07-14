@@ -15,7 +15,6 @@
     :params="params"
     size="small"
     @upload-image="ad"
-    @remove-image="removeImageMethod"
   ></uploader>
     <div class="mycontent">
      <textarea class="input" rows="5" cols="50"  v-model="post.content"></textarea>
@@ -63,7 +62,7 @@ export default {
        this.$store.dispatch({
           type: "updateImage",data:formData
       }).then((response) => {
-          console.log(response.data.data);
+          
           this.images.push(response.data.data)
         })
     }

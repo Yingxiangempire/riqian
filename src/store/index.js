@@ -6,6 +6,7 @@ import state from './state'
 import Vuex from 'vuex'
 import getters from './getters'
 import post from './modules/post'
+import weixinconfig from './modules/weixin'
 import user from './modules/user'
 Vue.use(Vuex);
 const store = new Vuex.Store({
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
     getters,
     modules: {
         post,
-        user
+        user,
+        weixinconfig
     }
 })
 export default store

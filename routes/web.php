@@ -22,6 +22,7 @@ $router->get('/auth/callback', 'Wechat\AuthController@callback');//微信授权�
 /*************************************微信相关接口end**********************************/
 
 /*************************************接口**********************************************/
+$router->get('/api/weixinConfig', 'Wechat\AuthController@config');//微信授权回调
 $router->post('/api/post', 'PostController@add');//发表日签
 $router->get('/api/post', 'PostController@index');//获取日签列表
 $router->post('/api/locationAndWeather', 'IndexController@request');//获取地点与天气

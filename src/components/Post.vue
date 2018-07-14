@@ -9,6 +9,10 @@
 
 <script>
 import { XImg } from 'vux'
+import { WechatPlugin, AjaxPlugin } from 'vux'
+import Vue from 'vue'
+Vue.use(WechatPlugin)
+
 export default {
   components: {
     XImg
@@ -31,6 +35,22 @@ export default {
         this.$route.params.imageUrl
       ]
     }
+  },
+  mounted(){
+    // Vue.http.get('/api', ({data}) => {
+    //   console.log(data.data);
+    //     Vue.wechat.config(data.data)
+    //  })
+    this.$store.dispatch({
+        type: "getWeixinConfig"
+      }).then(res =>{
+        Vue.wechat.config(res);
+        this.$wechat.onMenuShareTimeline({
+              title: 'hello VUX',
+              link:'https://www.yingxiangempire.com',
+              
+       })
+        });
   }
 }
 </script>

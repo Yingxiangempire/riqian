@@ -79,4 +79,10 @@ class AuthController extends Controller
          return $useAction->findOrCreateUser($user);
     }
 
+    public function config()
+    {
+        $app = app('wechat.official_account');
+        return $app->jssdk->buildConfig(['onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline'], $debug = false, $beta = false, $json = true);
+    }
+
 }

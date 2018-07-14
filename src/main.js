@@ -8,6 +8,8 @@ import VueRouter from 'vue-router'
 import App from './App'
 import router from './router/index'
 
+
+
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 

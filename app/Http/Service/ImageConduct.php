@@ -185,7 +185,6 @@ class ImageConduct
 
         $editor->blend($imageMain, $imageSub, 'normal', 1, 'center', 0, -30);
 
-
         $editor->save($imageMain, base_path('Image') . '/quick.png');
         $im = @imagecreatefrompng(base_path('Image') . '/quick.png');
         ob_start();
@@ -391,6 +390,76 @@ class ImageConduct
         $result=$upload->uploadThroughPath(base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd')."tag.png", $key.date('Ymd'));
         return $result;
     }
+
+    public function getHopePics($key, $tag, $weather, $locations, $subcontent,$postfix)
+    {
+        $data = ["weather" => "晴", "city" => "上海", "img" => "0"];
+        $editor = Grafika::createEditor();
+        $imageMain = Grafika::createBlankImage(640, 960);
+        $editor->fill($imageMain, new Color('#FFFFFF'));
+
+        //获取主图并合并至主图
+        $editor->open($inputImage,base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd').'.'.$postfix);
+        $editor->resizeFill($inputImage, 640, 500);
+        $editor->blend($imageMain, $inputImage, 'normal', 9, 'top-center', 0, 0);
+        //添加日期
+        $editor->draw($imageMain,
+            Grafika::createDrawingObject('Line', array(40, 430), array(170, 430), 14, new Color('#000000')));//添加横线
+        $editor->draw($imageMain,
+            Grafika::createDrawingObject('Line', array(40, 430), array(40, 580), 14, new Color('#000000')));//添加横线
+        $editor->draw($imageMain,
+            Grafika::createDrawingObject('Line', array(170, 430), array(170, 580), 14, new Color('#000000')));//添加横线
+        $editor->draw($imageMain,
+            Grafika::createDrawingObject('Line', array(40, 580), array(60, 580), 14, new Color('#000000')));//添加横线
+        $editor->draw($imageMain,
+            Grafika::createDrawingObject('Line', array(150, 580), array(170, 580), 14, new Color('#000000')));//添加横线
+        $weather = new WeatherController();
+        $date = $weather->Cal(date('Y'), date('m'), date('d'));
+        $dates = getdate(mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));
+        $editor->text($imageMain, date('Ym'), 18, 65, 450, new Color('#FFFFFF'), base_path('Image') . '/ttf/wryh.ttf',
+            0);
+        $editor->text($imageMain, date('d'), 42, 75, 480, new Color('#000000'),
+            base_path('Image') . '/ttf/wryh.ttf', 0);
+        $editor->text($imageMain, '农历 ' . $date['month'] . $date['day'], 8, 70, 540, new Color('#000000'),
+            base_path('Image') . '/ttf/wryh.ttf', 0);
+        $editor->text($imageMain, $dates['weekday'], 14, 65, 570, new Color('#000000'),
+            base_path('Image') . '/ttf/wryh.ttf', 0);
+
+        //添加天气与地点
+
+        $editor->open($location, base_path('Image') . '/location.png');
+        $editor->resizeFit($location, 40, 40);//优先宽度等比例缩放
+        $editor->open($weather, base_path('Image') . '/weathercn/' . $data['img'] . '.png');
+        $editor->resizeFit($weather, 40, 40);//优先宽度等比例缩放
+        $editor->blend($imageMain, $weather, 'normal', 9, 'bottom-left', 10, -5);
+        $editor->blend($imageMain, $location, 'normal', 9, 'bottom-left', 520, -5);
+        $editor->text($imageMain, $data['weather'], 13, 55, 930, new Color('#000000'),
+            base_path('Image') . '/ttf/wryh.ttf', 0);
+        $editor->text($imageMain, $data['city'], 13, 560, 930, new Color('#000000'),
+            base_path('Image') . '/ttf/wryh.ttf', 0);
+
+
+        //添加文字
+
+        $editor->text($imageMain, $subcontent, 40, 20, 680, new Color('#000000'),
+            base_path('Image') . '/ttf/hand.ttf', 0);
+
+
+        //添加底部画笔LOGO
+        $editor->open($pen, base_path('Image') . '/pen.png');
+        $editor->resizeFit($pen, 80, 80);//优先宽度等比例缩放
+        $editor->blend($imageMain, $pen, 'normal', 1, 'bottom-center', 0, 0);
+        $editor->save($imageMain, base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd').'tag.png');
+        $im = @imagecreatefrompng(base_path('storage').'/app/userImage/'.$key.'/'.date('Ymd').'tag.png');
+        ob_start();
+        imagepng($im);
+        $content = ob_get_contents();
+        imagedestroy($im);
+        ob_end_clean();
+        return Response::make($content)->header('Content-Type', 'image/png');
+    }
+
+
 
     /**
      * 判断是横图还是竖图

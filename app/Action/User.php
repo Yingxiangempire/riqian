@@ -27,6 +27,7 @@ class User extends BaseAction
      */
     public function addOrUpdateUser($data, $id = null)
     {
+        
         $user = $id ? UserModel::find($id) : new UserModel();
         if ($data['openid'] || $data['phone']) {
             if($id){
