@@ -47,11 +47,9 @@ export default {
         Vue.wechat.config(res);
         var wechat=this.$wechat;
         this.$wechat.ready(function(){
-
-
           setTimeout(  
-              console.log(wechat),
             wechat.onMenuShareTimeline({
+               title: '除非经由记忆之路，人不能达到纵深',
               success:function(){
                 alert('分享成功')
               },
