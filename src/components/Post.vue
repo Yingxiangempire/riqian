@@ -50,7 +50,6 @@ export default {
           alert('ok');
             this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
-              desc:'我已经在映像日记平台坚持写日记20天',
               link:'https://www.yingxiangempire.com/aa',
               success:function(){
                 alert('分享成功')
