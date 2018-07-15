@@ -36,7 +36,7 @@ export default {
       ]
     }
   },
-  mounted(){
+  created(){
     // Vue.http.get('/api', ({data}) => {
     //   console.log(data.data);
     //     Vue.wechat.config(data.data)
@@ -45,9 +45,7 @@ export default {
         type: "getWeixinConfig"
       }).then(res =>{
         Vue.wechat.config(res);
-        console.log(this.$wechat);
         this.$wechat.ready(function(){
-          alert('ok');
             this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
               success:function(){
