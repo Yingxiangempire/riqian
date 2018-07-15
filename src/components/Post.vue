@@ -45,11 +45,13 @@ export default {
         type: "getWeixinConfig"
       }).then(res =>{
         Vue.wechat.config(res);
+        var wechat=this.$wechat;
         this.$wechat.ready(function(){
 
 
-          setTimeout(  this.$wechat.onMenuShareTimeline({
-              title: 'hello VUX',
+          setTimeout(  
+              console.log(wechat),
+            wechat.onMenuShareTimeline({
               success:function(){
                 alert('分享成功')
               },
@@ -58,7 +60,7 @@ export default {
               }
        }),3000)
 
-        });
+        })(wechat);
         this.$wechat.error(function(){
           alert('你妹');
         });
