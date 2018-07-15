@@ -46,7 +46,9 @@ export default {
       }).then(res =>{
         Vue.wechat.config(res);
         this.$wechat.ready(function(){
-            this.$wechat.onMenuShareTimeline({
+
+
+          setTimeout(  this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
               success:function(){
                 alert('分享成功')
@@ -54,7 +56,8 @@ export default {
               cancel:function(){
                 alert('分享失败')
               }
-       })
+       }),3000)
+
         });
         this.$wechat.error(function(){
           alert('你妹');
