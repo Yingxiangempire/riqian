@@ -4,7 +4,6 @@
       <span style="font-size:20px;">Loading</span>
       <x-img :src="src" :webp-src="`${src}?type=webp`" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
     </div>
-    <button  @click="share" type="primary">保存</button> 
   </div>
 </template>
 
@@ -19,31 +18,6 @@ export default {
     XImg
   },
   methods: {
-    share(){
-     this.$store.dispatch({
-        type: "getWeixinConfig"
-      }).then(res =>{
-        Vue.wechat.config(res);
-        console.log(this.$wechat);
-        this.$wechat.ready(function(){
-        this.$wechat.onMenuShareTimeline({
-              title: 'hello VUX',
-              desc:'我已经在映像日记平台坚持写日记20天',
-              link:'https://www.yingxiangempire.com/aa',
-              imageUrl:'http://css.tools.chinaz.com/tools/images/public/logos/logo-index.png',
-              success:function(){
-                alert('分享成功')
-              },
-              cancel:function(){
-                alert('分享失败')
-              }
-          })
-        });
-        this.$wechat.error(function(){
-          alert('你妹');
-        });
-        });
-    },
     success (src, ele) {
       console.log('success load', src)
       const span = ele.parentNode.querySelector('span')
@@ -67,7 +41,30 @@ export default {
     //   console.log(data.data);
     //     Vue.wechat.config(data.data)
     //  })
-    
+    this.$store.dispatch({
+        type: "getWeixinConfig"
+      }).then(res =>{
+        Vue.wechat.config(res);
+        console.log(this.$wechat);
+        this.$wechat.ready(function(){
+ this.$wechat.onMenuShareTimeline({
+              title: 'hello VUX',
+              desc:'我已经在映像日记平台坚持写日记20天',
+              link:'https://www.yingxiangempire.com/aa',
+              imageUrl:'http://css.tools.chinaz.com/tools/images/public/logos/logo-index.png',
+              success:function(){
+                alert('分享成功')
+              },
+              cancel:function(){
+                alert('分享失败')
+              }
+       })
+        });
+        this.$wechat.error(function(){
+          alert('你妹');
+        });
+       
+        });
   }
 }
 </script>
