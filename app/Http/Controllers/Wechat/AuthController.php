@@ -82,7 +82,7 @@ class AuthController extends Controller
     public function config()
     {
         $app = app('wechat.official_account');
-        return $app->jssdk->buildConfig(['onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline'], $debug = true, $beta = false, $json = true);
+        return $app->jssdk->buildConfig(['onMenuShareQQ', 'onMenuShareWeibo','onMenuShareTimeline'], $debug = true, $beta = false, $json = true,$url='https://www.yingxiangempire.com');
     }
 
 }
