@@ -47,7 +47,8 @@ export default {
         Vue.wechat.config(res);
         console.log(this.$wechat);
         this.$wechat.ready(function(){
- this.$wechat.onMenuShareTimeline({
+          alert('ok');
+            this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
               desc:'我已经在映像日记平台坚持写日记20天',
               link:'https://www.yingxiangempire.com/aa',
