@@ -50,8 +50,6 @@ export default {
           alert('ok');
             this.$wechat.onMenuShareTimeline({
               title: 'hello VUX',
-              link: 'http://binsee.github.io/wechat-php-sdk/',
-              imgUrl: 'http://binsee.github.io/wechat-php-sdk/img/author.jpg',
               success:function(){
                 alert('分享成功')
               },
