@@ -4,7 +4,7 @@
       <span style="font-size:20px;">Loading</span>
       <x-img :src="src" :webp-src="`${src}?type=webp`" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
     </div>
-    <button  @click.native="share" type="primary">保存</button> 
+    <button  @click="share" type="primary">保存</button> 
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     share(){
-this.$store.dispatch({
+     this.$store.dispatch({
         type: "getWeixinConfig"
       }).then(res =>{
         Vue.wechat.config(res);
